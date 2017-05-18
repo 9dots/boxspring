@@ -1,0 +1,40 @@
+BOXSPRING
+- User is always building website, so build app focused on editing JS/HTML
+- Designed for teachers to construct codebases as starter projects / template for students to edit/fill in
+- Key Features:
+	- Full-featured Editor
+	- Fast app builds
+		- dependency management
+		- Transform user code from ES6 -> ES5
+		- Configure transformations
+	- Permissions:
+	 	- RWX permissions
+		 	- On a file level
+		 	- On a line-by-line level
+	- Multiple files/tabs
+	- Media Uploads
+		- Asset management
+		- Flat list of files with slashes to simulate directory tree
+	- Publishing
+		- Publish link to project, specific file, etc.
+	- User data / persistence
+		- Save/View past projects
+		- View
+- Advanced Features (Someday/Maybe)
+	- Blurred out sections of code
+	- Fill in the blank code (with specicic character widths)
+	- Live reload/rendering of HTML/CSS/JS
+	- Collaboration / Teacher can view/edit your editor environment
+
+
+Tasks:
+	x Get requirebin running locally
+	- Rebuild app in Vdux
+	- Swap Ace in for CodeMirror
+	- Add line-locking
+	- Add file tree / assets
+	- Add more permi
+	- Add tabs/multiple files that can reference each other
+	- Optimize
+	- Mod/Build our own WZRD implementation
+	- Modify browser-module-sandbox to require/bundle multiple user files

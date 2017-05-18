@@ -1,0 +1,5 @@
+{
+  "name": "PreviewManager",
+  "main": "PreviewManager.js",
+  "browser": "PreviewManager.js"
+}

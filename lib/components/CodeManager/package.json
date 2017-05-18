@@ -1,0 +1,5 @@
+{
+  "name": "CodeManager",
+  "main": "CodeManager.js",
+  "browser": "CodeManager.js"
+}
