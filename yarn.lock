@@ -666,6 +666,10 @@ abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
 
+abstract-leveldown@0.7.2, abstract-leveldown@~0.7.0:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/abstract-leveldown/-/abstract-leveldown-0.7.2.tgz#5675283787c9e5157f4230e68aa71ff9c330c222"
+
 accepts@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.3.tgz#c3ca7434938648c3e0d9c1e328dd68b622c284ca"
@@ -1473,6 +1477,27 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
+browser-module-cache@~0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/browser-module-cache/-/browser-module-cache-0.1.3.tgz#61f4b45b425d8df39f32549399f901fd0fe64cd6"
+  dependencies:
+    level-js "~1.0.7"
+    memdown "~0.2.1"
+
+browser-module-sandbox@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/browser-module-sandbox/-/browser-module-sandbox-1.4.5.tgz#5649150bf421686986931f6ba2831d987508b168"
+  dependencies:
+    browser-module-cache "~0.1.3"
+    browser-request "~0.3.3"
+    detective "^4.0.0"
+    iframe voronianski/iframe
+    inherits "^2.0.1"
+
+browser-request@~0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/browser-request/-/browser-request-0.3.3.tgz#9ece5b5aca89a29932242e18bf933def9876cc17"
+
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/browserify-aes/-/browserify-aes-1.0.6.tgz#5e7725dbdef1fd5930d4ebab48567ce451c48a0a"
@@ -1857,6 +1882,10 @@ deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
+defined@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/defined/-/defined-1.0.0.tgz#c98d9bcef75674188e110969151199e39b1fa693"
+
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
@@ -1897,6 +1926,13 @@ detect-indent@^4.0.0:
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-4.0.0.tgz#f76d064352cdf43a1cb6ce619c4ee3a9475de208"
   dependencies:
     repeating "^2.0.0"
+
+detective@^4.0.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/detective/-/detective-4.5.0.tgz#6e5a8c6b26e6c7a254b1c6b6d7490d98ec91edd1"
+  dependencies:
+    acorn "^4.0.3"
+    defined "^1.0.0"
 
 diffie-hellman@^5.0.0:
   version "5.0.2"
@@ -2475,9 +2511,17 @@ https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
+idb-wrapper@~1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/idb-wrapper/-/idb-wrapper-1.2.0.tgz#332aa6cd353bfe150f159feb5507a46b5528e34e"
+
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
+
+"iframe@github:voronianski/iframe":
+  version "0.3.1"
+  resolved "https://codeload.github.com/voronianski/iframe/tar.gz/7a5de4d2a394f1c8c14d6d300c6454c868bfed9e"
 
 indexof@0.0.1:
   version "0.0.1"
@@ -2624,6 +2668,10 @@ isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
+isbuffer@~0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/isbuffer/-/isbuffer-0.0.0.tgz#38c146d9df528b8bf9b0701c3d43cf12df3fc39b"
+
 isobject@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
@@ -2711,6 +2759,14 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
+level-js@~1.0.7:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/level-js/-/level-js-1.0.8.tgz#24586a1dbbc4f0205d007e79354a03065194b208"
+  dependencies:
+    abstract-leveldown "0.7.2"
+    idb-wrapper "~1.2.0"
+    isbuffer "~0.0.0"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -2767,6 +2823,12 @@ lower-case@^1.1.1:
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
+
+memdown@~0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/memdown/-/memdown-0.2.1.tgz#1eab9a80472195d83c27e055d2ff1da6146af713"
+  dependencies:
+    abstract-leveldown "~0.7.0"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"

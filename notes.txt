@@ -29,8 +29,9 @@ BOXSPRING
 
 Tasks:
 	x Get requirebin running locally
-	- Rebuild app in Vdux
-	- Swap Ace in for CodeMirror
+	x Build app scaffold in Vdux
+	- Get Ace working in app
+	- Mod requirebin source 
 	- Add line-locking
 	- Add file tree / assets
 	- Add more permi
