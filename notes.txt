@@ -30,12 +30,38 @@ BOXSPRING
 Tasks:
 	x Get requirebin running locally
 	x Build app scaffold in Vdux
-	- Get Ace working in app
-	- Mod requirebin source 
+	x Get Ace working in app
+	X Mod requirebin source 
+	- Add tabs/multiple files that can reference each other
 	- Add line-locking
 	- Add file tree / assets
 	- Add more permi
-	- Add tabs/multiple files that can reference each other
 	- Optimize
 	- Mod/Build our own WZRD implementation
 	- Modify browser-module-sandbox to require/bundle multiple user files
+
+
+
+
+Optimize:
+	- cache bundles
+		- add package.json back in
+		- cache full bundle server-side (later)
+
+Browserify in browser:
+	- use cloud storage for files
+	- shim browserify, replace fs module with 
+
+Example code:
+
+var r = require('react')
+var para = document.createElement("p");
+var node = document.createTextNode(`Paragraph: ${new Date().getTime()}`);
+para.appendChild(node);
+var app = document.getElementById("app")
+app.appendChild(para);
+
+
+/////
+var r = require('react')
+console.log('Code running! ' + String(new Date().getTime()))
