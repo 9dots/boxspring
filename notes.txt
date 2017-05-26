@@ -32,6 +32,7 @@ Tasks:
 	x Build app scaffold in Vdux
 	x Get Ace working in app
 	X Mod requirebin source 
+	- Get caching implemented
 	- Add tabs/multiple files that can reference each other
 	- Add line-locking
 	- Add file tree / assets
