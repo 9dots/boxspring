@@ -1,0 +1,5 @@
+{
+  "name": "Panel",
+  "main": "Panel.js",
+  "browser": "Panel.js"
+}
