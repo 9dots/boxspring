@@ -1,0 +1,186 @@
+// DB Schema for Firebase
+{
+	"users": {
+		"user349431": {
+			"id": "user349431",
+			"username": "dgershuni",
+			"firstName": "david",
+			"lastName": "gershuni",
+			"email": "vidgersh@gmail.com",
+			"projects": {
+				/* projects user is involved with in any capacity */
+				"project1": "admin",
+				"project8": "admin",
+				"project3": "cloner",
+				"project7": "writer",
+				"project384": "reader",
+				"project99": "reader",
+				"project103": "reader",
+				"project83": "reader"
+			}
+		},
+		"user348932": {
+			// ...
+		}
+	},
+
+	"projects": {
+		"project2382093": {
+			"name": "Devy Green",
+			"currentFile": "fileDescriptor2935",
+			"tabsOpen": ["fileDescriptor2935", "fileData849283", "fileDescriptor2723"],
+			"admins": {
+				/* ADMIN PRIVILEGES
+					- example usecase: as admin, a teacher sets up a project template for their students to clone
+					- can fully read/write all "permissions", files, settings, etc.
+					- have all privileges
+				*/
+				"user934947": true,
+				"user32431": true
+			},
+			"forkers": {
+				/* FORKER PRIVILEGES
+					- example use-case: as a forker, a fellow teacher forks and modifies the project for their own class
+					- can read project, files, and file "permissions"
+					- can clone the project
+					- cannot write to files
+					- cannot write to "permissions"
+					- cannot read collaborator settings
+					- a forker becomes an admin of the cloned project
+				*/
+				"user34948": true,
+				"user34846": true,
+				"user348431": true,
+			},
+			"cloners": {
+				/* CLONER PRIVILEGES
+					- example use-case: as a cloner, a student clones their teacher"s project template
+					- can read files according to "permissions" set by admins
+					- certain files are hidden/protected
+					- cannot write to files
+					- cannot read or write "permissions"
+					- can clone the project
+					- a cloner becomes a writer of the cloned project
+					- (and remains a cloner as well)
+				*/
+				"user103922": true,
+				"user103243": true,
+				"user103245": true,
+			},
+			"writers": {
+				/* WRITER PRIVILEGES
+					- example use-case: as a writer, a student modifies/writers to a clone of their teacher"s project
+					- can read and write files according to "permissions" set by admins
+					- certain files are hidden/protected
+					- cannot read or write "permissions"
+				*/
+				"user32020": true,
+				"user182020": true,
+				"user06020": true,
+			},
+			"readers": {
+				/* READER PRIVILEGES
+					- use-case: as a reader, a propsective student can read/preview to learn from it
+					- can read files according to "permissions" set by admins
+					- certain files are hidden/protected
+				*/
+					"user32020": true,
+					"user182020": true,
+					"*": true,  // signifies "anyone
+			}
+		}
+	},
+
+	"fileTrees": {
+		"project2382093": {
+			"fileDescriptor2723": {},
+			"fileDescriptor2935": {},
+			"fileDescriptor2398": {
+					"fileDescriptor4432": {},
+					"fileDescriptor4433": {
+						"fileDescriptor4436": {},
+						"fileDescriptor4438": {},
+						"fileDescriptor4456": {}
+					}
+				},
+			}
+		},
+		"project9933": {
+			"fileDescriptor2723": {},
+			"fileDescriptor2935": {},
+			"fileDescriptor2398": {
+					"fileDescriptor4432": {},
+					"fileDescriptor4433": {
+						"fileDescriptor4436": {},
+						"fileDescriptor4438": {},
+						"fileDescriptor4456": {}
+					}
+				},
+			}
+		},
+	},
+
+	"fileDescriptors": {
+		/*
+			fileDescriptors is used to read/write file meta data only
+			It can potentially support text files and binary files
+		*/
+		"project238300": {
+			"fileDescriptor923a3": {
+				"id": "fileDescriptor923a2",
+				"type": "file",
+				"project": "project23849",
+				"name": "index.js",
+				"path": "fileDescriptor238232/fileDescriptor239847/fileDescriptor238328239/",
+				"permissions": "777",
+				"data": "fileData849283"
+			},
+			"fileDescriptor47832292": {
+				"id": "fileDescriptor47832292",
+				"type": "file",
+				"project": "project23849",
+				"name": "index.js",
+				"path": "fileDescriptor238232/fileDescriptor239847/fileDescriptor238328239/",
+				"permissions": "777",
+				"data": "fileData849283"
+			},
+			"fileDescriptor7253": {
+				"id": "fileDescriptor7253",
+				"type": "asset",
+				"project": "project23849",
+				"name": "splash.jpg",
+				"path": "fileDescriptor238232/fileDescriptor239847/",
+				"permissions": "777",
+				"data": "assetData111782"
+			},
+		}
+		//...
+	},
+	
+	"fileData": {
+		/*
+			fileData is used to read/write the actual file data of text files.
+			It does not maintain directory structure
+			It only supports text-based files. For binary files, use assetData
+		*/
+		"fileData849283": {
+			"id": "fileData849283",
+			"fd": "fileDescriptor816576",
+			"project": "project23849",
+			"data": "<Up to 10MB of text>"
+		},
+	},
+
+	"assetData": {
+		/*
+			assetData is used to read/write the actual data of binary assets
+			It does not maintain directory structure
+		*/
+		"assetData839204": {
+			"id": "assetData839204",
+			"meta": "fileDescriptor816576",
+			"project": "project23849",
+			"data": "<BINARY>", // ?
+		}
+	}
+}
