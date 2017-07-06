@@ -1,0 +1,5 @@
+{
+  "name": "ConditionalGameButton",
+  "main": "ConditionalGameButton.js",
+  "browser": "ConditionalGameButton.js"
+}
