@@ -118,7 +118,7 @@
   dependencies:
     "@f/extend" "^1.0.0"
 
-"@f/debounce@^1.0.2", "@f/debounce@^1.0.4":
+"@f/debounce@^1.0.2", "@f/debounce@^1.0.4", "@f/debounce@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@f/debounce/-/debounce-1.0.5.tgz#4e35438e819bbd918c6947e3029a28ebeffae83c"
 
@@ -672,6 +672,10 @@
   dependencies:
     "@f/noop" "^1.2.0"
     "@f/slice" "^1.1.3"
+
+"@f/throttle@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@f/throttle/-/throttle-1.0.0.tgz#b12f207086d7b7d43660f1b9154f76fc57e30a40"
 
 "@f/thunk-to-promise@^1.1.1":
   version "1.1.1"
@@ -4222,6 +4226,13 @@ redux-multi@^0.1.12, redux-multi@^0.1.91:
 redux-thunk@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-1.0.3.tgz#778aa0099eea0595031ab6b39165f6670d8d26bd"
+
+redux-timing@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/redux-timing/-/redux-timing-0.1.0.tgz#a4a506d247218c71e4bb6c70363437abae4ee3b3"
+  dependencies:
+    "@f/debounce" "^1.0.5"
+    "@f/throttle" "^1.0.0"
 
 redux@^3.5.2, redux@^3.6.0:
   version "3.7.1"

@@ -1,0 +1,7 @@
+[
+	{
+		"origin": ["localhost:8080"],
+		"method": ["GET", "PUT", "DELETE", "POST", "PATCH"],
+		"maxAgeSeconds": 10000
+	}
+]

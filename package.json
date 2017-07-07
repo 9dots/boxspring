@@ -39,6 +39,7 @@
     "redux-effects-fetch": "^0.5.5",
     "redux-effects-location": "^0.2.7",
     "redux-effects-timeout": "^0.1.7",
+    "redux-timing": "^0.1.0",
     "uuid-js": "^0.7.5",
     "vdux": "^3.0.8",
     "vdux-ace": "^1.0.4",
