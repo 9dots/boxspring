@@ -2,83 +2,60 @@ var fsPath = require('fs-path');
 var gcs = require('@google-cloud/storage')({
   keyFilename: __dirname + '/gcs-key.json'
 });
+const browserify = require('browserify');
 
-let bucket = gcs.bucket('boxspring-data');
-const projectId = "p123"
-
-bucket.getFiles({
-	prefix: projectId,
-})
-.then(function(response) {
-	let files = response[0]
-	Promise.all(files.map(function(file) {
-		file.download()
-			.then(function(data) {
-				return writeFile({
-					name: file.name,
-					contents: data
-				})
-			})
-			.catch(function(err) {
-				console.log("Error writing file: ", err)
-			})
-	}))
-})
-.then(buildBundle)
-.catch(function(err) {
-	console.log("Error...", err)
-})
-
-function buildBundle() {
-	console.log("Downloading complete...")
+main()
+function main() {
+	console.log("Cloud function starting...")
+	const projectId = "p123"
+	writeProjectFileTreeToDisk(projectId)
+	.then((val) => {
+		console.log("About to create bundle...", val)
+		createBundle(projectId).catch((e) => e)
+	})
+	.catch((err) => {console.log("Error writing project tree to disk: ", err)})
 }
 
-function writeFile({name, contents}) {
-	return new Promise(function(resolve, reject) {
-		fsPath.writeFile(name, contents, function(err) {
-		  if(err) {
-		    reject(err);
-		  } else {
-		    resolve()
-		  }
+function writeProjectFileTreeToDisk(projectId) {
+	console.log("Writing file tree to disk...")
+	let bucket = gcs.bucket('boxspring-data');
+	return bucket.getFiles({
+		prefix: projectId,
+	})
+	.then((response) => {
+		let files = response[0]
+		return Promise.all(files.map(writeGCSObjectToDisk))
+	})
+}
+
+function writeGCSObjectToDisk(obj) {
+	console.log(`Creating promise to DL and write object '${obj.name}'`)
+	return obj.download()
+	.then((data) => { 
+		console.log(`Downloaded file ${obj.name}`)
+		return writeFile({
+			name: obj.name,
+			contents: data 
 		})
 	})
 }
 
-// writeFile({name:'folder2/testFile.txt', contents: "It worked!\n"})
-// 	.then(function() { console.log("Victory!\n") })
-// 	.catch(function() { console.log("Failed!\n") })
+function writeFile({name, contents}) {
+	console.log("Writing file to disk..", name)
+	return new Promise((resolve, reject) => {
+		fsPath.writeFile(name, contents, (err) => {
+			return err ? reject("error happened") : resolve(true)
+		})
+	})
+}
 
-// files.forEach(function(file) {
-	// fsPath.writeFile(file.name, 'content', function(err){
-	//   if(err) {
-	//     throw err;
-	//   } else {
-	//     console.log('wrote a file like DaVinci drew machines');
-	//   }
-	// });
-// })
-  	
-  // }
-
-  // Download all files at prefix
-	// And write to local tmp dir
-
-  // Optimization for later:
-	  // Concat and hash all files
-	  // Look for build in GCS/projectId/builds/hash
-	  // If exists, serve that instead of re-building
-
-	// Extract entry from package.json
-
+function createBundle(projectId) {
+	console.log("Creating bundle...")
 	// Run browserify from projectId directory, find package.json
-	// let b = browserify(projectId)
-	// b.bundle()
+	let b = browserify(projectId + '/')
+	b.bundle()
 	// Npm install modules, start with very few modules
-	
-	// Keep user modules and node modules together for now
-	// use b.external()?
-
+}
 	// TODO: Check for build errors...
 
 	// After build, upload to cloud storage
