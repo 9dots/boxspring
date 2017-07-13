@@ -1,4 +1,10 @@
+var mkdirp = require('mkdirp')
 var fsPath = require('fs-path');
+
+var path = require('path'),
+    execFile = require('child_process').execFile,
+    spawn = require('child_process').spawn
+
 var gcs = require('@google-cloud/storage')({
   keyFilename: __dirname + '/gcs-key.json'
 });
@@ -11,7 +17,7 @@ function main() {
 	writeProjectFileTreeToDisk(projectId)
 	.then((val) => {
 		console.log("About to create bundle...", val)
-		createBundle(projectId).catch((e) => e)
+		return createBundle(projectId)
 	})
 	.catch((err) => {console.log("Error writing project tree to disk: ", err)})
 }
@@ -49,15 +55,29 @@ function writeFile({name, contents}) {
 	})
 }
 
+// Run browserify from projectId directory, find package.json
 function createBundle(projectId) {
 	console.log("Creating bundle...")
-	// Run browserify from projectId directory, find package.json
-	let b = browserify(projectId + '/')
-	b.bundle()
-	// Npm install modules, start with very few modules
-}
-	// TODO: Check for build errors...
+		
+	console.log("Installing modules...")		
+	npm = execFile('npm', ['install'], {cwd: projectId}, function (err, stdin, stdout) {
+		if (err) { throw err }
 
-	// After build, upload to cloud storage
-	// Return the path to the build to the client, use hash of build as filename
-// });
+		console.log("Bundling with browserify...")
+		let b = spawn('browserify index.js > bundle2.js', [], {
+			cwd:projectId,
+			shell: true
+		}, function (e) {
+			console.log("Checking final status of bundle...")
+			if (e) {
+				console.log(e)
+			} else {
+				console.log("Bundle success")
+			}
+		})
+	});
+}
+// TODO: Check for build errors...
+
+// After build, upload to cloud storage
+// Return the path to the build to the client, use hash of build as filename
