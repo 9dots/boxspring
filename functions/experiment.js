@@ -1,16 +1,18 @@
-var mkdirp = require('mkdirp')
-var fsPath = require('fs-path');
+const mkdirp = require('mkdirp')
+const fsPath = require('fs-path');
+const {h64} = require('xxhashjs')
 
-var path = require('path'),
-    execFile = require('child_process').execFile,
-    spawn = require('child_process').spawn
+const path = require('path')
+const {execFile, spawn} = require('child_process')
 
-var gcs = require('@google-cloud/storage')({
+const gcs = require('@google-cloud/storage')({
   keyFilename: __dirname + '/gcs-key.json'
 });
 const browserify = require('browserify');
 
-main()
+let bucket = gcs.bucket('boxspring-data');
+
+// main()
 function main() {
 	console.log("Cloud function starting...")
 	const projectId = "p123"
@@ -24,7 +26,6 @@ function main() {
 
 function writeProjectFileTreeToDisk(projectId) {
 	console.log("Writing file tree to disk...")
-	let bucket = gcs.bucket('boxspring-data');
 	return bucket.getFiles({
 		prefix: projectId,
 	})
@@ -58,26 +59,43 @@ function writeFile({name, contents}) {
 // Run browserify from projectId directory, find package.json
 function createBundle(projectId) {
 	console.log("Creating bundle...")
-		
+	let bundle = ''
 	console.log("Installing modules...")		
 	npm = execFile('npm', ['install'], {cwd: projectId}, function (err, stdin, stdout) {
 		if (err) { throw err }
 
 		console.log("Bundling with browserify...")
-		let b = spawn('browserify index.js > bundle2.js', [], {
-			cwd:projectId,
-			shell: true
-		}, function (e) {
-			console.log("Checking final status of bundle...")
-			if (e) {
-				console.log(e)
-			} else {
-				console.log("Bundle success")
-			}
+		let b = spawn('browserify', ['index.js'], {cwd:projectId})
+
+		b.stdout.on('data', (data) => {
+			bundle += data
+		})
+
+		b.on('close', (exitCode) => {
+			console.log(`browserify closed with code `, exitCode)
+			returnBundleToClient(bundle)
 		})
 	});
 }
 // TODO: Check for build errors...
 
-// After build, upload to cloud storage
-// Return the path to the build to the client, use hash of build as filename
+returnBundleToClient('this is a bundle....', 'p123')
+function returnBundleToClient(bundle, projectId) {
+	// console.log(h64)
+	let bundleHash = h64(bundle, 0xABCD).toString(36)
+	console.log(bundleHash)
+
+	// After build, upload to cloud storage
+	let stream = bucket.file(`${projectId}-bundles/${bundleHash}`)
+	.createWriteStream({
+		metadata: { contentType: 'text/javascript'},
+  })
+	stream.on('finish', function() {
+		console.log("Upload complete!")
+		console.log("Return URL to user here")
+	})
+	stream.write(bundle)
+	stream.end()
+
+	// Return the path to the build to the client, use hash of build as filename
+}
