@@ -1,49 +1,46 @@
-const mkdirp = require('mkdirp')
 const fsPath = require('fs-path');
 const {h32} = require('xxhashjs')
 const {execFile, spawn} = require('child_process')
+const browserify = require('browserify');
 const gcs = require('@google-cloud/storage')({
   keyFilename: __dirname + '/gcs-key.json'
 });
-const browserify = require('browserify');
-const cors = require('cors')({origin: true});
 
 let bucket = gcs.bucket('boxspring-data');
 
 let newHash = ''
 let fileContents = []
+const tmp_dir = '/tmp/boxspring-projects/'
 
 module.exports = main
 
 function main(req, res) {
-	cors(req, res, () => {
-		console.log("----------Cloud function starting...--------------")
-		
-		const projectId = req.query.projectId;
-		console.log("Got projectId ", projectId)
+	console.log("----------Cloud function starting...--------------")
+	
+	const projectId = req.query.projectId;
+	console.log("Building project ", projectId)
 
-		writeProjectFileTreeToDisk(projectId)
-		.then((hash) => {
-			console.log("Hash of contents = ", hash)
-			let file = bucket.file(`bundles/${projectId}/${hash}`)
-			file.exists()
-			.then((data) => {
-				let fileExists = data[0]
-				if (fileExists) {
-					console.log("Using cached bundle...")
-					res.end(file.metadata.mediaLink)
-				} else {
-					console.log("Bundling from scratch...")
-					newHash = hash
-					createAndSendBundle(projectId, req, res)
-				}
-			})
+	writeProjectFileTreeToDisk(projectId)
+	.then((hash) => {
+		console.log("Hash of contents = ", hash)
+		let file = bucket.file(`bundles/${projectId}/${hash}`)
+		file.exists()
+		.then((response) => {
+			let fileExists = response[0]
+			if (fileExists) {
+				console.log("Using cached bundle...")
+				res.end(file.metadata.mediaLink)
+			} else {
+				console.log("Bundling from scratch...")
+				newHash = hash
+				createAndSendBundle(projectId, req, res)
+			}
 		})
-		.catch((err) => {
-			console.log("Error writing project tree to disk: ", err)
-			res.status = 503
-			res.end("Error bundling!", err)
-		})
+	})
+	.catch((err) => {
+		console.log("Error writing project tree to disk: ", err)
+		res.status = 503
+		res.end("Error bundling!", err)
 	})
 }
 
@@ -65,7 +62,7 @@ function writeProjectFileTreeToDisk(projectId) {
 						throw obj.name + ": FILE NOT FOUND"
 					fileContents.push(data[0])
 					return writeFile({
-						name: obj.name,
+						name: tmp_dir + obj.name,
 						contents: data[0] 
 					})
 				})
@@ -84,7 +81,6 @@ function writeProjectFileTreeToDisk(projectId) {
 	})
 }
 
-
 function writeFile({name, contents}) {
 	console.log("Writing file to disk..", name)
 	return new Promise((resolve, reject) => {
@@ -99,13 +95,15 @@ function writeFile({name, contents}) {
 function createAndSendBundle(projectId, req, res) {
 	console.log("Creating bundle...")
 	let bundle = ''
-	console.log("Installing modules with yarn...")		
-	execFile('yarn', ['install'], {cwd: projectId},
+	console.log("Installing modules with npm...")		
+	execFile('npm', ['install'], { cwd: tmp_dir + projectId },
 		function browserifyAndSend(err, stdin, stdout) {
 			if (err) { throw err }
 			console.log("Bundling with browserify...")
 			
-			let b = spawn('browserify', ['index.js'], {cwd:projectId})
+			let b = spawn('browserify', 
+				['index.js'], { cwd: tmp_dir + projectId }
+			)
 			b.stdout.on('data', (data) => { bundle += data })
 			b.on('close', (exitCode) => {
 				if (exitCode == 0)
@@ -116,7 +114,6 @@ function createAndSendBundle(projectId, req, res) {
 		}
 	)
 }
-
 
 function sendBundleToClient(bundle, projectId, req, res) {
 	// After build, upload to cloud storage

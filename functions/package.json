@@ -3,14 +3,12 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "@google-cloud/storage": "^1.2.0",
-    "bluebird": "^3.5.0",
     "browserify": "^14.4.0",
     "cors": "^2.8.4",
     "express": "^4.15.3",
     "firebase-admin": "~4.2.1",
-    "firebase-functions": "^0.5.7",
+    "firebase-functions": "^0.5.9",
     "fs-path": "^0.0.23",
-    "mkdirp": "^0.5.1",
     "xxhashjs": "^0.2.1",
     "yarn": "^0.27.5"
   },
