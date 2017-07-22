@@ -4,11 +4,12 @@ const buildProject = require('./build-project')
 const cors = require('cors')({origin:true})
 
 app = express()
-app.get('/buildProject', (req,res) => {
-	cors(req, res, () => {
-		buildProject(req, res)
-	})
-})
+app.get('/buildProject', buildProject)
+// app.get('/buildProject', (req,res) => {
+// 	cors(req, res, () => {
+// 		buildProject(req, res)
+// 	})
+// })
 app.get('/old-bundle', (req,res) => {
 	cors(req, res, () => {
 		oldBundler(req, res)
