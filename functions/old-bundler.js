@@ -20,7 +20,7 @@ function main(req, res) {
 	const projectId = req.query.projectId;
 	console.log("Building project ", projectId)
 
-	writeProjectFileTreeToDisk(projectId)
+	return writeProjectFileTreeToDisk(projectId)
 	.then((hash) => {
 		console.log("Hash of contents = ", hash)
 		let file = bucket.file(`bundles/${projectId}/${hash}`)

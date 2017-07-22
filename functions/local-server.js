@@ -1,15 +1,19 @@
 const express = require('express')
-const bundleHandler = require('./bundler')
-const fileTester = require('./file-test')
+const oldBundler = require('./old-bundler')
+const buildProject = require('./build-project')
 const cors = require('cors')({origin:true})
 
 app = express()
-app.get('/bundle', (req,res) => {
+app.get('/buildProject', (req,res) => {
 	cors(req, res, () => {
-		bundleHandler(req,res)
+		buildProject(req, res)
 	})
 })
-app.get('/fileTest', fileTester)
+app.get('/old-bundle', (req,res) => {
+	cors(req, res, () => {
+		oldBundler(req, res)
+	})
+})
 
 app.listen(3000, function () {
   console.log('Listening on port 3000...')
