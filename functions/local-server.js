@@ -1,6 +1,6 @@
 const express = require('express')
 const oldBundler = require('./old-bundler')
-const buildProject = require('./build-project')
+const buildProject = require('./BuildProject')
 const cors = require('cors')({origin:true})
 
 app = express()
