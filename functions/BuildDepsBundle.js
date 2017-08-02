@@ -6,20 +6,14 @@ const fsPath = require('fs-path');
 const gcs = require('@google-cloud/storage')({
   keyFilename: __dirname + '/gcs-key.json'
 });
+const bh = require('./BuildHelpers')
 
 module.exports = buildDepsBundle
 
-const TOTAL_BUILD_TIME = "TOTAL_BUILD_TIME"
-const GET_PACKAGE_JSON ="GET_PACKAGE_JSON"
-const INSTALL_DEPENDENCIES ="INSTALL_DEPENDENCIES"
-const BROWSERIFY = "BROWSERIFY"
-const UPLOAD_BUNDLE = "UPLOAD_BUNDLE"
-const SEND_RESPONSE = "SEND_RESPONSE"
-
 function buildDepsBundle(req, res) {
-	console.log("buildDepsBundle cloud function starting.....................................")
+	console.log("buildDepsBundle cloud function starting............")
 	res.header('Access-Control-Allow-Origin', '*')
-	console.time(TOTAL_BUILD_TIME)
+	console.time(bh.TOTAL_BUILD_TIME)
 	
 	let projectId = req.query.projectId;
 	console.log("Building dependencies for project...", projectId)
@@ -42,13 +36,13 @@ function buildDepsBundle(req, res) {
 
 	function main() {
 		console.log("Downloading project package.json from GCS...")
-		console.time(GET_PACKAGE_JSON)
+		console.time(bh.GET_PACKAGE_JSON)
 
 		packageJSONFile = bucket.file(`${projectId}/package.json`)
 
 		return packageJSONFile.download()
 		.then((response) => { 
-			console.timeEnd(GET_PACKAGE_JSON)
+			console.timeEnd(bh.GET_PACKAGE_JSON)
 
 			// get package.json contents from response			
 			let contents = response[0]
@@ -67,73 +61,61 @@ function buildDepsBundle(req, res) {
 			console.log(deps)
 			
 			// write package json to disk
-			return writeFile({
+			return bh.writeFile({
 				name: `${tmpDirParent}/${packageJSONFile.name}`,
 				contents: contents
 			})
 		})
 		.then(() => {
-			console.time(INSTALL_DEPENDENCIES)
+			console.time(bh.INSTALL_DEPENDENCIES)
 			return installPackages()
 		})
 		.then(() => {
-			console.timeEnd(INSTALL_DEPENDENCIES)
+			console.timeEnd(bh.INSTALL_DEPENDENCIES)
 			
 			console.log("Generating bundle with browserify...")
-			console.time(BROWSERIFY)
+			console.time(bh.BROWSERIFY)
 			let depsBundle = browserify({
 				basedir: tmpDir,
 				paths: `${tmpDir}/node_modules`
 			})
 			.require(deps)
-			return createBundle(depsBundle)
+			return bh.createBundle(depsBundle)
 		})
 		.then((output) => {
-			console.timeEnd(BROWSERIFY)
+			console.timeEnd(bh.BROWSERIFY)
 			console.log("Bundle generated...")
 			bundleContents = output
 
-			console.timeEnd(TOTAL_BUILD_TIME)
+			console.timeEnd(bh.TOTAL_BUILD_TIME)
 
 			console.log("Sending bundle to user...")
-			console.time(SEND_RESPONSE)
+			console.time(bh.SEND_RESPONSE)
 			res.json({
+				resultType: 'bundleContents',
 				bundleType: 'deps',
-				bundleHash: packageHash,
-				bundleContents: bundleContents
+				contents: bundleContents.toString(),
+				hash: packageHash,
 			})
-			console.timeEnd(SEND_RESPONSE)
+			console.timeEnd(bh.SEND_RESPONSE)
 
 			// after we return res to user, we upload to GCS
-			console.time(UPLOAD_BUNDLE)
+			console.time(bh.UPLOAD_BUNDLE)
 			console.log("Uploading bundle to GCS...")
 
 			let bundleFile = bucket.file(`${bundlePathPrefix}/${packageHash}.js`)
 			return bundleFile.save(bundleContents)
 		})
 		.then(() => {
-			console.timeEnd(UPLOAD_BUNDLE)
+			console.timeEnd(bh.UPLOAD_BUNDLE)
 
 			// TODO: Delete node_modules folder??
 
 			return true
 		})
-		.catch(function (err) {
-			let errmsg = "Error in cloud function buildDepsBundle: " + err.message + err.stack
-			console.log(errmsg)
-			res.status(500).end(errmsg)
-		})
+		.catch(bh.logAndReturnError)
 	}
 	
-	function writeFile({name, contents}) {
-		console.log("Writing file to disk..", name)
-		return new Promise((resolve, reject) => {
-			fsPath.writeFile(name, contents, (err) => {
-				return err ? reject("error in fsPath.writeFile: ", err) : resolve(true)
-			})
-		})
-	}
-
 	function installPackages() {
 		console.log("Installing packages with NPMI...")
 		return new Promise((resolve, reject) => {
@@ -141,14 +123,5 @@ function buildDepsBundle(req, res) {
 				return err ? reject("NPMI error: ", err) : resolve(true)
 			})
 		})
-	}
-
-	function createBundle(b) {
-		console.log("In createBundle...")
-		return new Promise((resolve, reject) => {
-			b.bundle((err, buf) => {
-				return err ? reject("error in browserify: ", err) : resolve(buf)
-			})
-		})	
 	}
 }
