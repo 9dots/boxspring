@@ -1,5 +1,4 @@
 const express = require('express')
-const oldBundler = require('./old-bundler')
 const buildDepsBundle = require('./BuildDepsBundle')
 const buildAppBundle = require('./BuildAppBundle')
 

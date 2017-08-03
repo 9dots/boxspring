@@ -53,10 +53,10 @@ function buildDepsBundle(req, res) {
 			
 			// parse and hash package.json 
 			console.log(textContents)
-			let pkg = JSON.parse(textContents)
 			packageHash = h32(textContents, 0xABCD).toString(36)
 			console.log('Generated package hash...', packageHash)
 
+			let pkg = JSON.parse(textContents)
 			deps = Object.keys(pkg.dependencies)
 			console.log(deps)
 			
@@ -103,7 +103,9 @@ function buildDepsBundle(req, res) {
 			console.time(bh.UPLOAD_BUNDLE)
 			console.log("Uploading bundle to GCS...")
 
-			let bundleFile = bucket.file(`${bundlePathPrefix}/${packageHash}.js`)
+			let bundleFileName = `${bundlePathPrefix}/${packageHash}.js`
+			console.log("Uploading bundle as", bundleFileName)
+			let bundleFile = bucket.file(bundleFileName)
 			return bundleFile.save(bundleContents)
 		})
 		.then(() => {
