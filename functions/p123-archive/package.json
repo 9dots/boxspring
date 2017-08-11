@@ -1,0 +1,11 @@
+{
+  "name": "p123",
+  "version": "1.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "test",
+  "main": "index.js",
+  "dependencies": {
+    "react": "15.4.2"
+  }
+}

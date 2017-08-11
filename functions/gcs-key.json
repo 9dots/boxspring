@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "boxspring-88",
+  "private_key_id": "3f611cdd4aef399dab3d766541718856f13d81a0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCZQobNs4w9AXIB\ndFpWpEKq0ycM6LwW+eIS0yRq0iYZ97fSjUDSW+NvCN3FcyZ5N/1FVPdgSu0UEDHa\nWjZuervxEHsAFSSOHIB2uQPG15TOptoTlHZMGnIjK5zeXK54z2B6odv2PQUlmWpg\nhAlMAbkyjtfH1ce0qNHsWi1g40bEZTFLpfHt5bV8pYEeKj4ezJQig4S0hHyyhnFA\n0sjuiZcbGaj7rO4Gnf0s9h8M+gHMCxQLeyFC5R4PRP+utn5FKXZwmazeWquZ0ix0\nGu1Ma+qdCbb5U4h8UTG22rArsRPGa7HbCLUnTQ6fbGWrDJQKPk98KDb1dGE6/hH7\nYCNtQdndAgMBAAECggEAPOYP/cXmKEmePRC4YuwzZ4Cu6DTEpJaXrCZFNsMZi8EA\nxMQHKW+E4JaT1QUsGQfT9oxMHfG34fyLarnlHiJb8u67CW3dUDDoJQTgiM8aHMF1\nL0mTdiseBnaqhzspwuyYaDJP3rkhhe6/s+lTbmXS6tGS0Z/TkqhwfevZU0IMWTZE\nvBFg19aZiNmh93ltVldfZYF8kk4H9mgNLeUL4HLdDv8VfibTPugxudxta5RHsilB\nOOyjRNvGJiYtvH5js9sGpXuZREyagphvA68jaAmECXj0IKCXEGsFjwvDI2I75uAq\nKl/VEadQszdjAFqlKmcVIRlaBuPNhGxkQpWyKr/z6wKBgQDU6Kj2Nfd8wPrI2Zg2\n5XZsC7DTdOeaMmL3hFNBV1L+n7shNMMFhufD64KP8QqZ8fgM0VEWhoIve/uscyOI\nfugINDcBbbyWi3O0RD9OqgK2GcXjMjfSWoJviNRIIcU5Uu8RcXKl4L+uE9hgRK+s\nlIX9mhJh2f2CyAfs35gKe38/+wKBgQC4R031KhKXNZAe0DLNaIuXuFz90exroFQK\nxocmh5cdr6Gq6ebwvo27DTh8KSzCgksvlt3q+AH+YOlzIsK/uWFeqNAiZPl/Yqft\nMWAMw2wjh97gk4QOFctCVDud7Enjg4PF4D6q24i4C730qT94ttvvcGkxi7DJOQ5Z\nxUJdw1guBwKBgQCaaBVJYkAXSLlX+n6qqWVl3GCkKm9g49PkYCIlDBiTsvH6lhIt\nqvXgn6czjwM6PELBwPgG1wwJNeiC24nUjvzmHkAaGCSiJYaHIMus2B1ZRX2/VIcp\nVhysmNYjbeJjvWLGCrmz1TgOHjRZNNcW2SwHjLpyHq79LuaYglv4ljHmCwKBgQCJ\n2YU+ra9kf8QE2Nf4AonSAC9IDD4gMLpNqT82ml137ocwdHK2isU5NOWZM6/w/UjD\nG8d8WvQa12IrJ8ipZUKqbfvsjr55BVL7Q2FHivSdC6m1M4SoiLMZNiu2sih/0kTD\nxED8zObUTqxVljoN0jRqRBvc3VNs44qRqtc/jr6rBwKBgQC8Wh2Z2C4NWt3sqydb\nsmbSfw9lSXb3fbq0hgcsflo4GBx0jFynAyk+1lb5A81leHCDAw4BnB2lzHJKGoJD\n8RC4DoC/Eo+oQyBL/j0JkDmPha17Vrw8/AHfFoWU48yCzaEiuvHviZVsmzVC8eBF\nAj9DNThjhFOaqibRhVaiEX0vJw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloud-functions@boxspring-88.iam.gserviceaccount.com",
+  "client_id": "112779098756558477104",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-functions%40boxspring-88.iam.gserviceaccount.com"
+}
