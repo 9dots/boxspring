@@ -115,7 +115,7 @@ function buildDepsBundle(req, res) {
 
 			return true
 		})
-		.catch(bh.logAndReturnError)
+		.catch((err) => bh.logAndReturnError(res, err))
 	}
 	
 	function installPackages() {

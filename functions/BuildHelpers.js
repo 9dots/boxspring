@@ -2,7 +2,7 @@ const fsPath = require('fs-path');
 
 module.exports = {
 	
-	logAndReturnError(err) {
+	logAndReturnError(res, err) {
 		let errmsg = "Error in cloud function: " + err.message + err.stack
 		console.log(errmsg)
 		res.status(500).end(errmsg)

@@ -109,7 +109,7 @@ function buildAppBundle(req, res) {
 			let bundleFile = bucket.file(`${bundlePathPrefix}/${projectHash}.js`)
 			return bundleFile.save(bundleContents)
 		})
-		.catch(bh.logAndReturnError)
+		.catch((err) => bh.logAndReturnError(res, err))
 	}
 
 	function generateProjectHash(files) {

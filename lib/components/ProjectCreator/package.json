@@ -1,0 +1,5 @@
+{
+  "name": "ProjectCreator",
+  "main": "ProjectCreator.js",
+  "browser": "ProjectCreator.js"
+}
