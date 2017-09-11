@@ -88,7 +88,8 @@ function buildAppBundle(req, res) {
 			console.timeEnd(bh.BROWSERIFY)
 			
 			console.log("Bundle generated...")
-			bundleContents = output
+			bundleContents = output.toString()
+			console.log("bundleContents = ", bundleContents)
 
 			console.timeEnd(bh.TOTAL_BUILD_TIME)
 
@@ -97,7 +98,7 @@ function buildAppBundle(req, res) {
 			res.json({
 				resultType: 'bundleContents',
 				bundleType: 'app',
-				contents: bundleContents.toString(),
+				contents: bundleContents,
 				hash: projectHash,
 			})
 			console.timeEnd(bh.SEND_RESPONSE)
@@ -115,14 +116,16 @@ function buildAppBundle(req, res) {
 	function generateProjectHash(files) {
 		console.log("Concatting & hashing md5s fetched from GCS...")
 		console.time(bh.HASH)
-		// console.log(files.map((file) => file.name))
 		console.log(files.map((file) => file.name))
 		
 		let concattedHashes = files
-			.filter((file) => (
-				(file.kind === 'storage#object') && (file.name !== `${projectId}/package.json`)
-			))
-			.map((file) => file.metadata.md5Hash)
+			.filter(
+				(file) => file.name != `${projectId}/package.json`
+			)
+			.map((file) => {
+				console.log(`${file.name} => ${file.metadata.md5Hash}`)
+				return file.metadata.md5Hash
+			})
 			.sort().join('')
 
 		projectHash = h32(concattedHashes, 0xABCD).toString(36)
