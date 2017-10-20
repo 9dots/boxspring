@@ -19,6 +19,7 @@
   "homepage": "https://github.com/9dots/boxspring#readme",
   "dependencies": {
     "@f/map": "^1.5.3",
+    "@f/map-values": "^1.0.0",
     "@f/rgba": "^1.0.0",
     "@f/sleep": "^1.0.0",
     "@f/times": "^1.0.0",
