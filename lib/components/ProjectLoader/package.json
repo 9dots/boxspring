@@ -1,0 +1,5 @@
+{
+  "name": "ProjectLoader",
+  "main": "ProjectLoader.js",
+  "browser": "ProjectLoader.js"
+}

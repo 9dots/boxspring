@@ -1,0 +1,5 @@
+{
+  "name": "LoginPage",
+  "main": "LoginPage.js",
+  "browser": "LoginPage.js"
+}
