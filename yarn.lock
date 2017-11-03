@@ -5136,9 +5136,9 @@ vdux-ace@^1.0.4:
     redux-ephemeral "^0.1.9"
     vdux "^3.0.6"
 
-vdux-containers@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/vdux-containers/-/vdux-containers-1.2.8.tgz#027956cbb1e7edba692f8076d8b33d8d6d772a3a"
+vdux-containers@^1.2.10:
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/vdux-containers/-/vdux-containers-1.2.10.tgz#2d2cc212624f1b86ca5d5c687471c15ba072b646"
   dependencies:
     "@f/contains-element" "^1.0.0"
     "@f/debounce" "^1.0.4"

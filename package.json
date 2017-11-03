@@ -48,7 +48,7 @@
     "uuid-js": "^0.7.5",
     "vdux": "^3.0.8",
     "vdux-ace": "^1.0.4",
-    "vdux-containers": "^1.2.8",
+    "vdux-containers": "^1.2.10",
     "vdux-delay": "^1.0.6",
     "vdux-fire": "^1.2.7",
     "vdux-form": "^1.2.3",
