@@ -1,0 +1,5 @@
+{
+  "name": "TemplateFileManager",
+  "main": "TemplateFileManager.js",
+  "browser": "TemplateFileManager.js"
+}

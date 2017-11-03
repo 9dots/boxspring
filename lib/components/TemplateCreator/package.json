@@ -1,0 +1,5 @@
+{
+  "name": "TemplateCreator",
+  "main": "TemplateCreator.js",
+  "browser": "TemplateCreator.js"
+}
