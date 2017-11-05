@@ -2,3 +2,4 @@
 - Add Modal for loading project
 - Make quasi-folders like glitch.com
 - Understand File loading system
+- Add ability to insert pictures
