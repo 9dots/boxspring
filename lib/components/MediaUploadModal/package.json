@@ -1,0 +1,5 @@
+{
+  "name": "MediaUploadModal",
+  "main": "MediaUploadModal.js",
+  "browser": "MediaUploadModal.js"
+}
