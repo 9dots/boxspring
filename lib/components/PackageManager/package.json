@@ -1,0 +1,5 @@
+{
+  "name": "PackageManager",
+  "main": "PackageManager.js",
+  "browser": "PackageManager.js"
+}

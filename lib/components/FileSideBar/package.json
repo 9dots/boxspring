@@ -1,0 +1,5 @@
+{
+  "name": "FileSideBar",
+  "main": "FileSideBar.js",
+  "browser": "FileSideBar.js"
+}
