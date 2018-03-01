@@ -1,0 +1,13 @@
+Client sending files -> Everything on google cloud storage.
+
+Check cloud storage permissions
+
+Check for cloud storage sdk instead of fetch API
+
+Change the GCS project and bucket
+
+Delete dependencies bundler
+
+Find best way to sync between storage and local
+	Can use r-sync but its slow
+	See if anyone's written r-sync for JS
