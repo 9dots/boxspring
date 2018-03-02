@@ -8,7 +8,7 @@ const setups = {
     projectId: "boxspring-81172",
     storageBucket: "boxspring-81172.appspot.com",
     messagingSenderId: "421029558857"
-  }
+  };
 }
 
 fs.writeFileSync('lib/client/firebaseConfig.js', 'module.exports = ' + JSON.stringify(setups["dev"]))

@@ -1,7 +1,8 @@
 [
 	{
-		"origin": ["localhost:8080"],
+		"origin": ["http://localhost:8080"],
 		"method": ["GET", "PUT", "DELETE", "POST", "PATCH"],
 		"maxAgeSeconds": 10000
 	}
 ]
+//gsutil cors set ${json file name} gs://${bucket name}
